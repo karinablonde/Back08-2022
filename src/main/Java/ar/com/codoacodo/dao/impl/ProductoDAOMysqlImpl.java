@@ -1,6 +1,7 @@
 package ar.com.codoacodo.dao.impl;
 
 import java.sql.Connection;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,20 +40,16 @@ public class ProductoDAOMysqlImpl implements IProductoDAO {
 	
 	@Override
 	public List<Producto> findAll() throws Exception {
-		// 1 - necesito la Connection
+		
 		Connection connection = AdministradorDeConeccciones.getConnection();
 
-		// 2 - arma el statement
 		String sql = "SELECT * FROM PRODUCTO";
 		Statement statement = connection.createStatement();
 
-		// 3 - resultset
 		ResultSet resultSet = statement.executeQuery(sql);
 
-		// Interface i = new ClaseQueImplementaLaInterface();
 		List<Producto> productos = new ArrayList<Producto>();
 
-		// verifico si hay datos
 		while (resultSet.next()) {
 			productos.add(this.crearProducto(resultSet));
 		}
@@ -81,14 +78,14 @@ public class ProductoDAOMysqlImpl implements IProductoDAO {
 		
 		Connection connection = AdministradorDeConeccciones.getConnection();
 
-		String sql = "UPDATE PRODUCTO set titulo=?, precio=?, autor=?, img=? WHERE id=?";
+		String sql = "UPDATE PRODUCTO set titulo=?, precio=?, autor=?, reseña=? WHERE id=?";
 		
 		PreparedStatement statement = connection.prepareStatement(sql);
 		
 		statement.setString(1,producto.getTitulo());
 		statement.setDouble(2,producto.getPrecio());
 		statement.setString(3,producto.getAutor());
-		statement.setString(4,producto.getImg());
+		statement.setString(4,producto.getReseña());
 		statement.setLong(5,producto.getId());
 		
 		statement.execute();
@@ -101,7 +98,7 @@ public class ProductoDAOMysqlImpl implements IProductoDAO {
 		
 		Connection connection = AdministradorDeConeccciones.getConnection();
 															 
-		String sql = "INSERT INTO PRODUCTO (codigo,titulo,precio,fecha_alta,autor,img) values(?,?,?,?,?,?)" ;
+		String sql = "INSERT INTO PRODUCTO (codigo,titulo,precio,fecha_alta,autor,reseña) values(?,?,?,?,?,?)" ;
 		
 		PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 		
@@ -110,7 +107,7 @@ public class ProductoDAOMysqlImpl implements IProductoDAO {
 		statement.setDouble(3,producto.getPrecio());
 		statement.setDate(4, new java.sql.Date(producto.getFechaAlta().getTime()));
 		statement.setString(5,producto.getAutor());
-		statement.setString(6,producto.getImg());
+		statement.setString(6,producto.getReseña));
 		
 		statement.execute();
 		
@@ -131,30 +128,25 @@ public class ProductoDAOMysqlImpl implements IProductoDAO {
 		Double precio = resultSet.getDouble("precio");
 		Date fechaAlta = resultSet.getDate("fecha_alta");
 		String autor = resultSet.getString("autor");
-		String img = resultSet.getString("img");
+		String reseña = resultSet.getString("reseña");
 
-		return new Producto(idDb, codigo, titulo, precio, fechaAlta, autor, img);
+		return new Producto(idDb, codigo, titulo, precio, fechaAlta, autor, reseña);
 	}
 	
 	@Override
 	public List<Producto> search(String clave) throws Exception {
-		// 1 - necesito la Connection
+		
 		Connection connection = AdministradorDeConeccciones.getConnection();
 
-		// 2 - arma el statement
 		String sql = "SELECT * FROM PRODUCTO WHERE TITULO LIKE ?";
 		PreparedStatement statement = connection.prepareStatement(sql);
 
-		//setear el valor que va en remplazo del ?
 		statement.setString(1, "%" + clave + "%");
 		
-		// 3 - resultset
 		ResultSet resultSet = statement.executeQuery();
 
-		// Interface i = new ClaseQueImplementaLaInterface();
 		List<Producto> productos = new ArrayList<Producto>();
 
-		// verifico si hay datos
 		while (resultSet.next()) {
 			productos.add(this.crearProducto(resultSet));
 		}

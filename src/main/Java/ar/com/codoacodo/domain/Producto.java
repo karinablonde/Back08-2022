@@ -10,24 +10,24 @@ public class Producto {
 	private Double precio;
 	private Date fechaAlta;
 	private String autor;
-	private String img;
+	private String reseña;
 	
-	public Producto(String codigo, String titulo, Double precio, Date fechaAlta, String autor, String img) {
+	public Producto(String codigo, String titulo, Double precio, Date fechaAlta, String autor, String reseña) {
 		this.codigo = codigo;
 		this.titulo = titulo;
 		this.precio = precio;
 		this.fechaAlta = fechaAlta;
 		this.autor = autor;
-		this.img = img;
+		this.reseña = reseña;
 	}
-	public Producto(Long id, String codigo, String titulo, Double precio, Date fechaAlta, String autor, String img) {
+	public Producto(Long id, String codigo, String titulo, Double precio, Date fechaAlta, String autor, String reseña) {
 		this.id = id;
 		this.codigo = codigo;
 		this.titulo = titulo;
 		this.precio = precio;
 		this.fechaAlta = fechaAlta;
 		this.autor = autor;
-		this.img = img;
+		this.reseña = reseña;
 	}
 	public Long getId() {
 		return id;
@@ -65,20 +65,19 @@ public class Producto {
 	public void setAutor(String autor) {
 		this.autor = autor;
 	}
-	public String getImg() {
-		return img;
+	public String getReseña() {
+		return reseña;
 	}
-	public void setImg(String img) {
-		this.img = img;
+	public void setImg(String reseña) {
+		this.reseña = reseña;
 	}
 	
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", codigo=" + codigo + ", titulo=" + titulo + ", precio=" + precio
-				+ ", fechaAlta=" + fechaAlta + ", autor=" + autor + ", img=" + img + "]";
+				+ ", fechaAlta=" + fechaAlta + ", autor=" + autor + ", reseña=" + reseña + "]";
 	}
 	
-	//alt+shift+s
 	
 	
 }

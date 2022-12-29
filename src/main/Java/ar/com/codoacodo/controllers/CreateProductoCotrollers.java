@@ -1,7 +1,6 @@
 package ar.com.codoacodo.controllers;
 
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,12 +44,12 @@ public class CreateProductoController extends BaseController {
 			return;
 		}
 		
-		String img = req.getParameter("img");
+		String reseña = req.getParameter("reseña");
 		
 		IProductoDAO dao = new ProductoDAOMysqlImpl();
 
 		
-		Producto newProducto = new Producto(codigo, titulo, Double.parseDouble(precio), new Date(), autor, img);
+		Producto newProducto = new Producto(codigo, titulo, Double.parseDouble(precio), new Date(), autor, reseña);
 		
 		try {
 			dao.create(newProducto);
