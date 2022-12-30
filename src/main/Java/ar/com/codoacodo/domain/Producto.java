@@ -68,7 +68,7 @@ public class Producto {
 	public String getReseña() {
 		return reseña;
 	}
-	public void setImg(String reseña) {
+	public void setReseña(String reseña) {
 		this.reseña = reseña;
 	}
 	

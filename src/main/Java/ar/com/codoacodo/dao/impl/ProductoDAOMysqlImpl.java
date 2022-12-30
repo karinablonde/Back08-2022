@@ -26,6 +26,7 @@ public class ProductoDAOMysqlImpl implements IProductoDAO {
 		ResultSet resultSet = statement.executeQuery(sql);
 
 		if (resultSet.next()) {
+			
 			Producto p = this.crearProducto(resultSet);
 			cerrar(connection);
 			return p;
@@ -44,6 +45,7 @@ public class ProductoDAOMysqlImpl implements IProductoDAO {
 		Connection connection = AdministradorDeConeccciones.getConnection();
 
 		String sql = "SELECT * FROM PRODUCTO";
+		
 		Statement statement = connection.createStatement();
 
 		ResultSet resultSet = statement.executeQuery(sql);
@@ -51,6 +53,7 @@ public class ProductoDAOMysqlImpl implements IProductoDAO {
 		List<Producto> productos = new ArrayList<Producto>();
 
 		while (resultSet.next()) {
+			
 			productos.add(this.crearProducto(resultSet));
 		}
 		
@@ -107,8 +110,8 @@ public class ProductoDAOMysqlImpl implements IProductoDAO {
 		statement.setDouble(3,producto.getPrecio());
 		statement.setDate(4, new java.sql.Date(producto.getFechaAlta().getTime()));
 		statement.setString(5,producto.getAutor());
-		statement.setString(6,producto.getReseña));
-		
+		statement.setString(6,producto.getReseña());
+	
 		statement.execute();
 		
 		ResultSet res = statement.getGeneratedKeys();
@@ -139,6 +142,7 @@ public class ProductoDAOMysqlImpl implements IProductoDAO {
 		Connection connection = AdministradorDeConeccciones.getConnection();
 
 		String sql = "SELECT * FROM PRODUCTO WHERE TITULO LIKE ?";
+		
 		PreparedStatement statement = connection.prepareStatement(sql);
 
 		statement.setString(1, "%" + clave + "%");
@@ -148,6 +152,7 @@ public class ProductoDAOMysqlImpl implements IProductoDAO {
 		List<Producto> productos = new ArrayList<Producto>();
 
 		while (resultSet.next()) {
+			
 			productos.add(this.crearProducto(resultSet));
 		}
 		

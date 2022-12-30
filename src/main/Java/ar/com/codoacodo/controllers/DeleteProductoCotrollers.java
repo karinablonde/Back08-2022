@@ -23,13 +23,14 @@ public class DeleteProductoController extends HttpServlet{
 		IProductoDAO dao = new ProductoDAOMysqlImpl();
 
 		try {
+			
 			dao.delete(id);
-			
 			req.setAttribute("success", List.of("Se he eliminado el producto con id:" + id));
-		} catch (Exception e) {
-			e.printStackTrace();
 			
-			req.setAttribute("erorrs", List.of("NO se he eliminado el producto :" + e.getMessage()));
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			req.setAttribute("errors", List.of("NO se he eliminado el producto :" + e.getMessage()));
 		}
 		
 	

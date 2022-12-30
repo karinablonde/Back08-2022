@@ -1,6 +1,7 @@
 package ar.com.codoacodo.controllers;
 
 import ar.com.codoacodo.dao.IProductoDAO;
+
 import ar.com.codoacodo.dao.impl.ProductoDAOMysqlImpl;
 import ar.com.codoacodo.domain.Producto;
 
@@ -13,7 +14,7 @@ public class UpdateProductoCotrollers {
 		Long id = 10l;
 		Producto p = dao.getById(id);
 		
-		p.setImg("urldementira");
+		p.setReseña("Resultados");
 		p.setAutor("Nuevo Autor");
 		
 		dao.update(p);

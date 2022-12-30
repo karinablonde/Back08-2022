@@ -31,7 +31,7 @@ public class EditarProductoController extends BaseController {
 		try {
 			pDB = dao.getById(Long.parseLong(id));
 		} catch (Exception e) {
-			req.setAttribute("errors", List.of("Erro actualizando Producto" + e.getMessage()));
+			req.setAttribute("errors", List.of("Error actualizando Producto" + e.getMessage()));
 		}
 		if(pDB == null) {
 			irA("/FindAllProductoController", req, resp);
@@ -46,15 +46,18 @@ public class EditarProductoController extends BaseController {
 			dao.update(pDB);
 			
 			req.setAttribute("success", List.of("Producto id:" + pDB.getId() + " actualizado correctamente"));
+			
 		} catch (Exception e) {
+			
 			e.printStackTrace();
-			req.setAttribute("errors", List.of("Erro actualizando Producto" + e.getMessage()));
+			req.setAttribute("errors", List.of("Error actualizando Producto" + e.getMessage()));
 		}
 		
 		irA("/FindAllProductoController", req, resp);
 	}
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		String id = req.getParameter("id");
 		
 		
@@ -64,7 +67,9 @@ public class EditarProductoController extends BaseController {
 		
 		try {
 			p = dao.getById(Long.parseLong(id));
+			
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 		
